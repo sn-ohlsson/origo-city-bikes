@@ -1,0 +1,8 @@
+# Front end related
+.elm-land
+dist
+.env
+elm-stuff
+node_modules
+.DS_Store
+*.pem
