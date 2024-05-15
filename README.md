@@ -2,7 +2,7 @@
 
 ## About the setup
 
-Very basic backend server in Kotlin, using [Ktor]().
+Very basic backend server in Kotlin, using [Ktor](https://ktor.io/docs/welcome.html).
 
 Frontend in [Elm](https://elm-lang.org/), using  [elm-land](https://elm.land) for routing/SPA functionality and [elm-css](https://package.elm-lang.org/packages/rtfeldman/elm-css/latest/) / [elm-tailwind-modules](https://matheus23.github.io/elm-tailwind-modules/) for styling. 
 
