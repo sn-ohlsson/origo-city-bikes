@@ -6,4 +6,4 @@ import kotlinx.serialization.Serializable
  * TODO: Map from real data
  */
 @Serializable
-data class Station(val lat: Int)
+data class Station(val lat: String)
