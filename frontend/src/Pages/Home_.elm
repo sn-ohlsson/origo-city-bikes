@@ -86,7 +86,7 @@ view model =
     , body =
         [ case model.fromBackend of
             Api.Loading ->
-                Html.text "Loading"
+                Html.text "Lastar innhald"
 
             Api.Success val ->
                 Html.text val
