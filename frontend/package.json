@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "elm-tailwind-modules --dir gen elm-land server",
+    "build": "elm-land build",
+    "build:tailwind": ""
+  },
   "dependencies": {
     "@oslokommune/punkt-assets": "^11.9.4",
     "concurrent": "^0.3.2",
