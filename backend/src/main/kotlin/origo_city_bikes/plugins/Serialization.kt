@@ -14,7 +14,7 @@ fun Application.configureSerialization() {
 
 	routing {
 		get("/origo") {
-			call.respondText("Text from here")
+			call.respondText("Text from backend here")
 		}
 	}
 }
