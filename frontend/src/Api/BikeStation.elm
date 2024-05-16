@@ -1,15 +1,15 @@
 module Api.BikeStation exposing (..)
 
+import Data.Station
 import Http
-import Json.Decode as Decode
 
 
 getData :
-    { onResponse : Result Http.Error String -> msg
+    { onResponse : Result Http.Error Data.Station.StationInformation -> msg
     }
     -> Cmd msg
 getData options =
     Http.get
         { url = "http://localhost:8080/origo"
-        , expect = Http.expectString options.onResponse
+        , expect = Http.expectJson options.onResponse Data.Station.stationInformationDecoder
         }
