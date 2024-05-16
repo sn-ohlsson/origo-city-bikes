@@ -2,9 +2,13 @@ module Pages.Home_ exposing (Model, Msg, page)
 
 import Api
 import Api.BikeStation
-import Html exposing (Html)
+import Html.Styled exposing (Html, div, header, img, main_, p, text)
+import Html.Styled.Attributes exposing (alt, css, src)
 import Http
 import Page exposing (Page)
+import Tailwind.Breakpoints as Breakpoints
+import Tailwind.Theme as Theme
+import Tailwind.Utilities as Tw
 import View exposing (View)
 
 
@@ -72,7 +76,7 @@ update msg model =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
     Sub.none
 
 
@@ -84,29 +88,55 @@ view : Model -> View Msg
 view model =
     { title = "Ohlsson | Origo Bysykkel"
     , body =
-        [ case model.fromBackend of
-            Api.Loading ->
-                Html.text "Lastar innhald"
+        [ header
+            [ css
+                [ Tw.w_full
+                , Tw.sticky
+                , Tw.top_0
+                , Tw.flex
+                , Tw.bg_color Theme.slate_100
+                , Tw.h_24
+                , Tw.py_2
+                , Tw.px_4
+                , Tw.justify_between
+                , Tw.items_center
+                ]
+            ]
+            [ img
+                [ src "/node_modules/@oslokommune/punkt-assets/dist/logos/oslologo.svg"
+                , alt "Oslo Kommune"
+                , css [ Tw.h_16 ]
+                ]
+                []
+            , p [ css [ Tw.text_xl, Tw.text_end, Breakpoints.sm [ Tw.text_2xl ] ] ] [ text "Sondre N. Ohlsson" ]
+            ]
+        , main_ []
+            [ case model.fromBackend of
+                Api.Loading ->
+                    text "Lastar innhald..."
 
-            Api.Success val ->
-                Html.text val
+                Api.Success val ->
+                    div [ css [ Tw.font_sans ] ]
+                        [ text <| val
+                        ]
 
-            Api.Failure err ->
-                Html.text <|
-                    case err of
-                        Http.BadUrl string ->
-                            "bad url " ++ string
+                Api.Failure err ->
+                    text <|
+                        case err of
+                            Http.BadUrl string ->
+                                "bad url " ++ string
 
-                        Http.Timeout ->
-                            "timeout"
+                            Http.Timeout ->
+                                "timeout"
 
-                        Http.NetworkError ->
-                            "network error"
+                            Http.NetworkError ->
+                                "network error"
 
-                        Http.BadStatus int ->
-                            "bad status: " ++ String.fromInt int
+                            Http.BadStatus int ->
+                                "bad status: " ++ String.fromInt int
 
-                        Http.BadBody string ->
-                            "bad body: " ++ string
+                            Http.BadBody string ->
+                                "bad body: " ++ string
+            ]
         ]
     }

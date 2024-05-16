@@ -4,9 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "elm-tailwind-modules --dir gen elm-land server",
+    "start": "build:tailwind elm-land server",
     "build": "elm-land build",
-    "build:tailwind": ""
+    "build:tailwind": "elm-tailwind-modules --tailwind-config tailwind.config.js --dir .gen"
   },
   "dependencies": {
     "@oslokommune/punkt-assets": "^11.9.4",
