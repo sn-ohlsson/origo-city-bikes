@@ -2,6 +2,7 @@ module Pages.Home_ exposing (Model, Msg, page)
 
 import Api
 import Api.BikeStation
+import Data.Station
 import Html.Styled exposing (Html, div, header, img, main_, p, text)
 import Html.Styled.Attributes exposing (alt, css, src)
 import Http
@@ -27,12 +28,12 @@ page =
 
 
 type alias Model =
-    { fromBackend : Api.Data String }
+    { stationInformation : Api.Data Data.Station.StationInformation }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( { fromBackend = Api.Loading }
+    ( { stationInformation = Api.Loading }
     , Api.BikeStation.getData { onResponse = BikeDataFetched }
     )
 
@@ -44,7 +45,7 @@ init =
 type Msg
     = NoOp
     | Fetch
-    | BikeDataFetched (Result Http.Error String)
+    | BikeDataFetched (Result Http.Error Data.Station.StationInformation)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -63,10 +64,10 @@ update msg model =
         BikeDataFetched result ->
             ( case result of
                 Ok data ->
-                    { model | fromBackend = Api.Success data }
+                    { model | stationInformation = Api.Success data }
 
                 Err err ->
-                    { model | fromBackend = Api.Failure err }
+                    { model | stationInformation = Api.Failure err }
             , Cmd.none
             )
 
@@ -111,13 +112,13 @@ view model =
             , p [ css [ Tw.text_xl, Tw.text_end, Breakpoints.sm [ Tw.text_2xl ] ] ] [ text "Sondre N. Ohlsson" ]
             ]
         , main_ []
-            [ case model.fromBackend of
+            [ case model.stationInformation of
                 Api.Loading ->
                     text "Lastar innhald..."
 
                 Api.Success val ->
                     div [ css [ Tw.font_sans ] ]
-                        [ text <| val
+                        [ text <| "Hurra!"
                         ]
 
                 Api.Failure err ->
