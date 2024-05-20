@@ -1,7 +1,7 @@
 module Data.Station exposing (..)
 
 import Json.Decode exposing (Decoder)
-import Json.Decode.Pipeline exposing (optional, required)
+import Json.Decode.Pipeline exposing (required)
 
 
 type alias StationInformation =
@@ -17,10 +17,10 @@ type alias Station =
     , name : String
     , address : String
     , crossStreet : String
-    , lat : Float
-    , lon : Float
     , isVirtualStation : Bool
     , capacity : Int
+    , numBikesAvailable : Int
+    , numDocksAvailable : Int
     }
 
 
@@ -40,7 +40,7 @@ stationDecoder =
         |> required "name" Json.Decode.string
         |> required "address" Json.Decode.string
         |> required "cross_street" Json.Decode.string
-        |> required "lat" Json.Decode.float
-        |> required "lon" Json.Decode.float
         |> required "is_virtual_station" Json.Decode.bool
         |> required "capacity" Json.Decode.int
+        |> required "num_bikes_available" Json.Decode.int
+        |> required "num_docks_available" Json.Decode.int

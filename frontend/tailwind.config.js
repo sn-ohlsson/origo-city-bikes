@@ -6,7 +6,8 @@ module.exports = {
             'display': ['Oslo Sans', 'Arial'],
             'body': ['Oslo Sans', 'Arial'],
             'sans': ['Oslo Sans', 'Arial'],
-            'mono': ['JetBrains Mono', 'monospace']
+            'mono': ['JetBrains Mono', 'monospace'],
+            'light': ['OsloSans-Light', 'Arial']
         },
         opacity: {},
         extend: {

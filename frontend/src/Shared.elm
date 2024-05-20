@@ -12,12 +12,17 @@ module Shared exposing
 
 -}
 
+import Data.Station
 import Effect exposing (Effect)
 import Json.Decode
+import RemoteData
 import Route exposing (Route)
 import Shared.Model
 import Shared.Msg
 import Style.ColorScheme as ColorScheme exposing (ColorScheme)
+import Task
+import Time
+import TimeZone
 
 
 
@@ -49,9 +54,16 @@ init result route =
             result
                 |> Result.withDefault
                     { colorScheme = ColorScheme.Light }
+
+        tzToMsg =
+            RemoteData.fromResult >> Shared.Msg.ReceiveTimeZone
     in
-    ( { colorScheme = flags.colorScheme }
-    , Effect.none
+    ( { colorScheme = flags.colorScheme
+      , stationInformation = RemoteData.NotAsked
+      , zone = RemoteData.Loading
+      , time = Time.millisToPosix 0
+      }
+    , TimeZone.getZone |> Task.attempt tzToMsg |> Effect.sendCmd
     )
 
 
@@ -64,10 +76,34 @@ type alias Msg =
 
 
 update : Route () -> Msg -> Model -> ( Model, Effect Msg )
-update route msg model =
+update _ msg model =
     case msg of
-        Shared.Msg.NoOp ->
-            ( model
+        Shared.Msg.FetchBikeData ->
+            ( { model | stationInformation = RemoteData.Loading }
+            , Effect.sendApiRequest
+                { endpoint = "origo"
+                , onResponse = Shared.Msg.BikeDataFetched
+                , decoder = Data.Station.stationInformationDecoder
+                }
+            )
+
+        Shared.Msg.BikeDataFetched result ->
+            ( case result of
+                Ok data ->
+                    { model | stationInformation = RemoteData.Success data }
+
+                Err err ->
+                    { model | stationInformation = RemoteData.Failure err }
+            , Effect.none
+            )
+
+        Shared.Msg.Tick newTime ->
+            ( { model | time = newTime }
+            , Effect.none
+            )
+
+        Shared.Msg.ReceiveTimeZone response ->
+            ( { model | zone = response }
             , Effect.none
             )
 
@@ -78,4 +114,4 @@ update route msg model =
 
 subscriptions : Route () -> Model -> Sub Msg
 subscriptions route model =
-    Sub.none
+    Time.every 1000 Shared.Msg.Tick
