@@ -4,7 +4,7 @@ import Accessibility.Styled.Live as Live
 import Css exposing (hover)
 import Data.Station exposing (Station, StationInformation)
 import Effect exposing (Effect)
-import Html.Styled exposing (Attribute, Html, button, dd, div, dl, dt, h1, h3, header, img, li, main_, p, span, text, ul)
+import Html.Styled exposing (Attribute, Html, button, dd, div, dl, dt, h1, h2, h3, header, img, li, main_, p, span, text, ul)
 import Html.Styled.Attributes exposing (alt, css, src)
 import Html.Styled.Events exposing (onClick)
 import Http
@@ -211,7 +211,7 @@ viewStation station =
     li [ css [ Tw.rounded, Tw.bg_color Theme.slate_100, Tw.p_4 ] ]
         [ div [ css [ Tw.flex, Tw.gap_x_2, Tw.items_baseline ] ]
             [ img [ css [ Tw.w_4 ], src "/node_modules/@oslokommune/punkt-assets/dist/icons/location-pin-filled.svg" ] []
-            , h3 [ css [ Tw.text_lg ] ] [ text station.name ]
+            , h2 [ css [ Tw.text_lg ] ] [ text station.name ]
             ]
         , dl []
             [ dt [ dtStyle ] [ text "Plassering:" ]
