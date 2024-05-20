@@ -17,9 +17,23 @@ The required build tools, styling setup and overall complexity are overkill.
 
 A _plain_ Elm application (without e.g. elm-land, elm-spa or elm-pages), or just plain ol' HTML from the backend would be a better choice.
 
-## Run using docker
+## Run using docker/docker compose
 
-> TODO.
+Make sure you've got docker and docker-compose installed.
+
+Build:
+
+```shell
+docker-compose build
+```
+
+Then run:
+
+````shell
+docker-compose up -d
+````
+
+In theory you should be able to access the application at `localhost:1234`, but something's awry with the ports.
 
 ## Run by just using your terminal
 ### Backend

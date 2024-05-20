@@ -4,13 +4,14 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "yarn build:tailwind && elm-land server",
-    "build": "elm-land build",
+    "start": "yarn build:tailwind && yarn elm-land server",
+    "build": "yarn elm-land build",
     "build:tailwind": "elm-tailwind-modules --tailwind-config tailwind.config.js --dir .gen"
   },
   "dependencies": {
     "@oslokommune/punkt-assets": "^11.9.4",
-    "concurrently": "^8.2.2",
+    "elm": "^0.19.1-6",
+    "elm-land": "^0.20.1",
     "elm-tailwind-modules": "^0.5.0",
     "i": "^0.3.7",
     "postcss": "^8.4.38",
