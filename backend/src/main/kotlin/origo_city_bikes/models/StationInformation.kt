@@ -1,10 +1,13 @@
 package origo_city_bikes.models
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+
 
 @Serializable
 data class StationInformation(
-	val last_updated: Long,
+	@SerialName("last_updated")
+	val lastUpdated: Long,
 	val ttl: Int,
 	val version: String,
 	val data: StationData
@@ -17,16 +20,21 @@ data class StationData(
 
 @Serializable
 data class Station(
-	val station_id: String,
+	@SerialName("station_id")
+	val stationID: String,
 	val name: String,
 	val address: String,
-	val cross_street: String,
+	@SerialName("cross_street")
+	val crossStreet: String?,
 	val lat: Double,
 	val lon: Double,
-	val is_virtual_station: Boolean,
+	@SerialName("is_virtual_station")
+	val isVirtualStation: Boolean,
 	val capacity: Int,
-	val station_area: StationArea,
-	val rental_uris: RentalUris
+	@SerialName("station_area")
+	val stationArea: StationArea,
+	@SerialName("rental_uris")
+	val rentalUris: RentalUris
 )
 
 @Serializable

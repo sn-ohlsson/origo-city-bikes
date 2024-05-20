@@ -1,6 +1,10 @@
 module Shared.Msg exposing (Msg(..))
 
-{-| -}
+import Data.Station
+import Http
+import RemoteData exposing (RemoteData)
+import Time
+import TimeZone
 
 
 {-| Normally, this value would live in "Shared.elm"
@@ -11,4 +15,7 @@ own file, so they can be imported by `Effect.elm`
 
 -}
 type Msg
-    = NoOp
+    = FetchBikeData
+    | BikeDataFetched (Result Http.Error Data.Station.StationInformation)
+    | Tick Time.Posix
+    | ReceiveTimeZone (RemoteData TimeZone.Error ( String, Time.Zone ))

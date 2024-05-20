@@ -1,7 +1,9 @@
+import "@oslokommune/punkt-assets/dist/fonts/OsloSans-Light.woff2"
 import "@oslokommune/punkt-assets/dist/fonts/OsloSans-Regular.woff2"
 import "@oslokommune/punkt-assets/dist/fonts/OsloSans-Medium.woff2"
 import "@oslokommune/punkt-assets/dist/fonts/OsloSans-RegularItalic.woff2"
 import "@oslokommune/punkt-assets/dist/logos/oslologo.svg"
+import "@oslokommune/punkt-assets/dist/logos/32x32-favicon.svg"
 
 // Types for Elm Land interop functions
 namespace ElmLand {

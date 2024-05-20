@@ -10,23 +10,29 @@
     <properties>
         <ktor_version>2.3.10</ktor_version>
         <kotlin.code.style>official</kotlin.code.style>
-        <kotlin_version>1.9.22</kotlin_version>
+        <kotlin_version>1.7.21</kotlin_version>
         <logback_version>1.4.14</logback_version>
         <slf4j_version>2.0.9</slf4j_version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <main.class>origo_city_bikes.ApplicationKt</main.class>
-        <kotlin.version>1.9.22</kotlin.version>
         <serialization.version>1.5.1</serialization.version>
     </properties>
     <repositories>
     </repositories>
     <dependencies>
+
         <dependency>
             <groupId>io.ktor</groupId>
             <artifactId>ktor-server-content-negotiation-jvm</artifactId>
             <version>${ktor_version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.ktor</groupId>
+            <artifactId>ktor-client-content-negotiation-jvm</artifactId>
+            <version>${ktor_version}</version>
+        </dependency>
+
         <dependency>
             <groupId>io.ktor</groupId>
             <artifactId>ktor-serialization-kotlinx-json-jvm</artifactId>
@@ -37,6 +43,7 @@
             <artifactId>kotlinx-serialization-json</artifactId>
             <version>${serialization.version}</version>
         </dependency>
+
         <dependency>
             <groupId>io.ktor</groupId>
             <artifactId>ktor-client-core-jvm</artifactId>
@@ -50,11 +57,6 @@
         <dependency>
             <groupId>io.ktor</groupId>
             <artifactId>ktor-server-core-jvm</artifactId>
-            <version>${ktor_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.ktor</groupId>
-            <artifactId>ktor-server-content-negotiation-jvm</artifactId>
             <version>${ktor_version}</version>
         </dependency>
         <dependency>
@@ -125,7 +127,7 @@
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-maven-plugin</artifactId>
-                <version>${kotlin.version}</version>
+                <version>${kotlin_version}</version>
                 <executions>
                     <execution>
                         <id>compile</id>
@@ -144,7 +146,7 @@
                     <dependency>
                         <groupId>org.jetbrains.kotlin</groupId>
                         <artifactId>kotlin-maven-serialization</artifactId>
-                        <version>${kotlin.version}</version>
+                        <version>${kotlin_version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
