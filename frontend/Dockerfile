@@ -21,7 +21,7 @@ FROM nginx:stable-alpine
 COPY --from=0 /app/frontend/dist /usr/share/nginx/html
 
 # Expose the port for the frontend
-EXPOSE 1234
+EXPOSE 80
 
 # Start the nginx server
 CMD ["nginx", "-g", "daemon off;"]
